@@ -36,7 +36,19 @@
                 <TextBlock Text="Mewantha Bandara" Margin="0,5,0,0" HorizontalAlignment="Center" />
                 <TextBlock Text="Achintha Premarathne" Margin="0,5,0,0" HorizontalAlignment="Center" />
                 <TextBlock Text="Dulaj Gamage" Margin="0,5,0,0" HorizontalAlignment="Center" />
+
+                <Button Content="Visit our website" Margin="0,20,0,0" HorizontalAlignment="Center"></Button>
             </StackPanel>
         </Grid>
     </Grid>
+    
+    <!--AppBar-->
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton IsCompact="False" Icon="Home" Label="Home" />
+                <AppBarButton IsCompact="False" Icon="Setting" Label="Settings" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
