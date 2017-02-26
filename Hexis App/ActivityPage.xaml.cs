@@ -23,12 +23,12 @@ namespace Hexis_App
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AboutPage : Page
+    public sealed partial class ActivityPage : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public AboutPage()
+        public ActivityPage()
         {
             this.InitializeComponent();
 
@@ -107,10 +107,5 @@ namespace Hexis_App
         }
 
         #endregion
-
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainPage));
-        }
     }
 }

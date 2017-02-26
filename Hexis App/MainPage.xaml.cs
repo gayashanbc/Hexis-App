@@ -107,5 +107,15 @@ namespace Hexis_App
         }
 
         #endregion
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AboutPage));
+        }
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ActivityPage));
+        }
     }
 }
