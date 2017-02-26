@@ -62,7 +62,7 @@
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar IsSticky="True">
+        <CommandBar IsSticky="True" Background="Green">
             <CommandBar.PrimaryCommands>
                 <AppBarButton IsCompact="False" Icon="Back" Label="Go Back" Click="AppBarButton_Click" />
             </CommandBar.PrimaryCommands>

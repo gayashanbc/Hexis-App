@@ -44,7 +44,7 @@
 
     <!--AppBar-->
     <Page.BottomAppBar>
-        <CommandBar IsSticky="True">
+        <CommandBar IsSticky="True" Background="Green">
             <CommandBar.PrimaryCommands>
                 <AppBarButton IsCompact="False" Icon="Home" Label="Home" Click="AppBarButton_Click" />
                 <AppBarButton IsCompact="False" Icon="Setting" Label="Settings" />

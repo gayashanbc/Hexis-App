@@ -57,7 +57,7 @@
 
     <!--App Bar-->
     <Page.BottomAppBar>
-        <CommandBar IsSticky="True" x:Name="appBar_MainPage">
+        <CommandBar IsSticky="True" x:Name="appBar_MainPage"  Background="Green">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Accept" IsCompact="False" Label="Zap Test" />
                 <AppBarButton Icon="Setting" IsCompact="False" Label="Settings" />
