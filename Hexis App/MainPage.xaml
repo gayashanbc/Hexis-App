@@ -41,16 +41,16 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <HyperlinkButton Grid.Row="0" Grid.Column="0" Content="Prolonged Sitting" Click="HyperlinkButton_Click"></HyperlinkButton>
+            <HyperlinkButton Grid.Row="0" Grid.Column="0" Content="Prolonged Sitting" Tag="Prolonged Sitting" Click="HyperlinkButton_Click"></HyperlinkButton>
             <ToggleSwitch Grid.Row="0" Grid.Column="1"></ToggleSwitch>
 
-            <HyperlinkButton Grid.Row="1" Grid.Column="0" Content="Limit Web Access" Click="HyperlinkButton_Click"></HyperlinkButton>
+            <HyperlinkButton Grid.Row="1" Grid.Column="0" Content="Limit Web Access" Tag="Limit Web Access" Click="HyperlinkButton_Click"></HyperlinkButton>
             <ToggleSwitch Grid.Row="1" Grid.Column="1"></ToggleSwitch>
 
-            <HyperlinkButton Grid.Row="2" Grid.Column="0" Content="Prolonged Calling" Click="HyperlinkButton_Click"></HyperlinkButton>
+            <HyperlinkButton Grid.Row="2" Grid.Column="0" Content="Prolonged Calling" Tag="Prolonged Calling" Click="HyperlinkButton_Click"></HyperlinkButton>
             <ToggleSwitch Grid.Row="2" Grid.Column="1"></ToggleSwitch>
 
-            <HyperlinkButton Grid.Row="3" Grid.Column="0" Content="Smoking" Click="HyperlinkButton_Click"></HyperlinkButton>
+            <HyperlinkButton Grid.Row="3" Grid.Column="0" Content="Smoking" Tag="Smoking" Click="HyperlinkButton_Click"></HyperlinkButton>
             <ToggleSwitch Grid.Row="3" Grid.Column="1"></ToggleSwitch>
         </Grid>
     </Grid>

@@ -115,7 +115,9 @@ namespace Hexis_App
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(ActivityPage));
+            var tag = (sender as HyperlinkButton).Tag;
+            string habitName = Convert.ToString(tag);
+            Frame.Navigate(typeof(ActivityPage), habitName);
         }
     }
 }

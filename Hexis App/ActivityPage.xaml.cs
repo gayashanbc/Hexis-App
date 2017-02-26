@@ -99,6 +99,7 @@ namespace Hexis_App
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
+            habitName.Text = e.Parameter.ToString();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
