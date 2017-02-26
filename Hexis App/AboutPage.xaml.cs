@@ -112,5 +112,7 @@ namespace Hexis_App
         {
             Frame.Navigate(typeof(MainPage));
         }
+
+       
     }
 }

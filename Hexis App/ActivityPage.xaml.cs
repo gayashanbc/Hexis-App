@@ -1,8 +1,10 @@
 ﻿using Hexis_App.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -27,6 +29,7 @@ namespace Hexis_App
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private string _habitName { get; set; }
 
         public ActivityPage()
         {
@@ -35,6 +38,12 @@ namespace Hexis_App
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            Loaded += new RoutedEventHandler(Page_Loaded);
+        }
+
+        void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            getLog();
         }
 
         /// <summary>
@@ -100,6 +109,7 @@ namespace Hexis_App
         {
             this.navigationHelper.OnNavigatedTo(e);
             habitName.Text = e.Parameter.ToString();
+            _habitName = e.Parameter.ToString();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -108,5 +118,49 @@ namespace Hexis_App
         }
 
         #endregion
+
+        private async void getLog()
+        {
+            int habitId = 0;
+            switch (_habitName)
+            {
+                case "Prolonged Sitting":
+                    habitId = 4;
+                    break;
+                case "Prolonged Calling":
+                    habitId = 2;
+                    break;
+                case "Limit Web Access":
+                    habitId = 3;
+                    break;
+                case "Smoking":
+                    habitId = 1;
+                    break;
+            }
+
+            string url = "http://www.cybertechparadise.com/get_log.php?habitId=" + habitId;
+            HttpClient client = new HttpClient();
+            string stringData = await client.GetStringAsync(new Uri(url));
+            //ActivityObject data = JsonConvert.DeserializeObject<ActivityObject>(stringData);
+            // T1.Text = data.Timetamp.ToString();
+
+            string[] log = stringData.Split(',');
+
+            foreach (string logTime in log)
+            {
+                LogList.Items.Add(new LogData(logTime));
+            }
+
+        }
+        public class LogData
+        {
+            public string LogTime { get; set; }
+
+            public LogData(string LogTime)
+            {
+                this.LogTime = LogTime;
+            }
+        }
+
     }
 }

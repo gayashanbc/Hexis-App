@@ -31,7 +31,28 @@
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="10,0,19,0">
             <Pivot>
                 <PivotItem Header="activity log">
-                    <TextBlock Text="Page one content"></TextBlock>
+                    <ScrollViewer>
+                        <ListView x:Name="LogList">
+                            <ListView.Resources>
+                                <DataTemplate x:Key="LogCell">
+                                    <Grid Margin="5 0 0 5">
+                                        <TextBlock x:Name="LogTime" FontSize="25" Margin="0,0,80,0" VerticalAlignment="Center" Text="{Binding LogTime}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.Resources>
+
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.ItemTemplate>
+                                <StaticResource ResourceKey="LogCell"/>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+
                 </PivotItem>
                 <PivotItem Header="progress chart">
                     <TextBlock Text="Page two content"></TextBlock>
