@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -54,4 +54,18 @@
             <ToggleSwitch Grid.Row="3" Grid.Column="1"></ToggleSwitch>
         </Grid>
     </Grid>
+
+    <!--App Bar-->
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" x:Name="appBar_MainPage">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Accept" IsCompact="False" Label="Zap Test" />
+                <AppBarButton Icon="Setting" IsCompact="False" Label="Settings" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="About"/>
+                <AppBarButton Label="User Manual"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
