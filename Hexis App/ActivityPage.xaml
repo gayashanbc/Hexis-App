@@ -52,12 +52,20 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </ScrollViewer>
-
                 </PivotItem>
+                
                 <PivotItem Header="progress chart">
                     <TextBlock Text="Page two content"></TextBlock>
                 </PivotItem>
             </Pivot>
         </Grid>
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton IsCompact="False" Icon="Back" Label="Go Back" Click="AppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
