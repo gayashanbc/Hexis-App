@@ -44,7 +44,7 @@
             <HyperlinkButton Grid.Row="0" Grid.Column="0" Content="Prolonged Sitting"></HyperlinkButton>
             <ToggleSwitch Grid.Row="0" Grid.Column="1"></ToggleSwitch>
 
-            <HyperlinkButton Grid.Row="1" Grid.Column="0" Content="Internet Browsing"></HyperlinkButton>
+            <HyperlinkButton Grid.Row="1" Grid.Column="0" Content="Limiti Web Access"></HyperlinkButton>
             <ToggleSwitch Grid.Row="1" Grid.Column="1"></ToggleSwitch>
 
             <HyperlinkButton Grid.Row="2" Grid.Column="0" Content="Prolonged Calling"></HyperlinkButton>
