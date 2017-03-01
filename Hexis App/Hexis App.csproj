@@ -118,7 +118,10 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\106.png" />
+    <Content Include="Assets\120.png" />
     <Content Include="Assets\150.png" />
+    <Content Include="Assets\170.png" />
     <Content Include="Assets\210.png" />
     <Content Include="Assets\24.png" />
     <Content Include="Assets\33.png" />
@@ -126,6 +129,7 @@
     <Content Include="Assets\58.scale-100.png" />
     <Content Include="Assets\58.scale-140.png" />
     <Content Include="Assets\58.scale-240.png" />
+    <Content Include="Assets\744x360.png" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\Logo.scale-140.png" />
     <Content Include="Assets\Logo.scale-240.png" />
