@@ -119,5 +119,10 @@ namespace Hexis_App
             string habitName = Convert.ToString(tag);
             Frame.Navigate(typeof(ActivityPage), habitName);
         }
+
+        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(BluetoothPage));
+        }
     }
 }
