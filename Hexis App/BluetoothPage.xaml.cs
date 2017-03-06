@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Networking.Proximity;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
-using Windows.System.Threading;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -120,26 +110,12 @@ namespace Hexis_App
             {
                 if (lstBTPaired.SelectedItem == null) // To prevent errors, make sure something is Selected
                 {
-                    //btnConnectArduino.IsEnabled = false; // Make sure it's False if you want to use a Button
                     txtBTStatus.Text = "No Device Selected! Try again..."; // Set UI Output
                     return;
                 }
                 else
                     if (lstBTPaired.SelectedItem != null) // Just making sure something was Selected
                 {
-
-                    // btnConnectArduino.IsEnabled = true; // Since an item is Selected, Enable Connect Button (If using a Button)
-
-
-                    /* This is a trick to Grab the Item and Remove '(' and ')' if using the Hostname & want just the Contents (00:00:00)
-                    // Of course we don't HAVE to do this, but this is a C# Trick/Hack to learn String Functions
-                    string ba = lstBTPaired.SelectedItem.ToString(); // Store the Tapped/Selected Item
-                    int found = 0; // Set the Found to 0
-                    found = ba.IndexOf("("); // Let's get the Index of the "(" in the String (ba)
-                    ba = ba.Substring(found + 1); // Use Substring with the IndexOf
-                    ba = ba.Replace(")", ""); // Now remove the last ")" in the String to be "00:00:00:00:00"
-                    // Test our Hack by Uncommenting Below...
-                    //MessageBox.Show(ba); - This is just to make sure we did it right */
 
                     PeerFinder.AlternateIdentities["Bluetooth:Paired"] = ""; // Grab Paired Devices
                     var PF = await PeerFinder.FindAllPeersAsync(); // Store Paired Devices
@@ -159,7 +135,6 @@ namespace Hexis_App
             {
                 txtBTStatus.Text = "Faild to connect: retrying";
                 lstBTPaired_Tap_1(sender, e);
-                //txtData.Text = ex.StackTrace;
                 System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 System.Diagnostics.Debug.WriteLine(ex.HResult);
