@@ -29,29 +29,17 @@ namespace Hexis_App
     /// </summary>
     public sealed partial class BluetoothPage : Page
     {
-        // Let's Define what we'll use throughout our App
-        StreamSocket BTSock; // Socket used to Communicate with the Arduino/BT Module
-        /* This is used for our Speech App
-         * SpeechRecognizer mySpeech; // Used for Recognizing App Speech (not yet in this App)
-         * SpeechSynthesizer mySpeechSS = new SpeechSynthesizer();
-         * 
-         * This is used to Grab Content from the Net, we'll be using GZIP in the end
-         * WebClient wc = new WebClient(); // Setting up our WebClient so we can just use "wc" and could be used to get an API
-        */
 
-        // Let's Store our Strings
-        string BTStatus = ""; // Used to Store if we can send Message (e.g. yes or no)
-        /*string BT_Received = ""; // We'll use to store Bluetooth Received Data
-        string whattosay = ""; // Used later to accept input for Speech */
+        StreamSocket bluetoothSocket; // Socket used to Communicate with the device
+
+        string bluetoothStatus = ""; 
         
         // Constructor
 
         public BluetoothPage()
         {
             this.InitializeComponent();
-            Loaded += MainPage_Loaded; // We need Async, so Use _Loaded
-            
-
+            Loaded += MainPage_Loaded; // We need Async, so Use _Loaded          
         }
       
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -79,41 +67,37 @@ namespace Hexis_App
 
         }
 
-        private async void BT2Arduino_Send(string WhatToSend)
+        private async void sendData(string data)
         {
-            if (BTSock == null) // If we don't have a connection, Send Error Control
+            if (bluetoothSocket == null) // If we don't have a connection, Send Error Control
             {
-                // MessageBox.Show("Please connect to a device first."); // Alert the user with a Notification (Optional)
                 txtBTStatus.Text = "No connection found. Try again!"; // Alert the UI
                 return; // Stop
             }
             else
-                if (BTSock != null) // Since we have a Connection
+                if (bluetoothSocket != null) // Since we have a Connection
             {
-                var datab = GetBufferFromByteArray(UTF8Encoding.UTF8.GetBytes(WhatToSend)); // Create Buffer/Packet for Sending
-                await BTSock.OutputStream.WriteAsync(datab); // Send our Message to Connected Arduino
-                txtBTStatus.Text = "Message Sent (" + WhatToSend + ")"; // Show what we sent to Device to UI
+                var byteEncodedData = GetBufferFromByteArray(UTF8Encoding.UTF8.GetBytes(data)); // Create Buffer/Packet for Sending
+                await bluetoothSocket.OutputStream.WriteAsync(byteEncodedData); // Send our Message to Connected Arduino
+                txtBTStatus.Text = "Message Sent (" + data + ")"; // Show what we sent to Device to UI
                 
             }
         }
 
-        private async void BT2Arduino_Receive()
+        private async void receiveData()
         {
-            if (BTSock == null) // If we don't have a connection, Send Error Control
+            if (bluetoothSocket == null) // If we don't have a connection, Send Error Control
             {
-                // MessageBox.Show("Please connect to a device first."); // Alert the user with a Notification (Optional)
                 txtBTStatus.Text = "No connection found. Try again!"; // Alert the UI
                 return; // Stop
             }
             else
-                if (BTSock != null) // Since we have a Connection
+                if (bluetoothSocket != null) // Since we have a Connection
             {
-                // var datab = GetBufferFromByteArray(UTF8Encoding.UTF8.GetBytes(WhatToSend)); // Create Buffer/Packet for Sending
-                //await BTSock.OutputStream.WriteAsync(datab); // Send our Message to Connected Arduino
-                while (BTSock != null)
+                while (bluetoothSocket != null)
                 {
                     IBuffer buffer = new byte[1024].AsBuffer();
-                    IBuffer readTask = await BTSock.InputStream.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.Partial);
+                    IBuffer readTask = await bluetoothSocket.InputStream.ReadAsync(buffer, buffer.Capacity, InputStreamOptions.Partial);
                     txtData.Text = UTF8Encoding.UTF8.GetString(buffer.ToArray(), 0, buffer.ToArray().Length);
                     System.Diagnostics.Debug.WriteLine(txtData.Text);
                     
@@ -121,9 +105,6 @@ namespace Hexis_App
             }
         }
 
-
-
-        // FUNCTION PROVIDED BY SPHERO
         private IBuffer GetBufferFromByteArray(byte[] package)
         {
             using (DataWriter dw = new DataWriter())
@@ -163,12 +144,12 @@ namespace Hexis_App
                     PeerFinder.AlternateIdentities["Bluetooth:Paired"] = ""; // Grab Paired Devices
                     var PF = await PeerFinder.FindAllPeersAsync(); // Store Paired Devices
 
-                    BTSock = new StreamSocket(); // Create a new Socket Connection
-                    await BTSock.ConnectAsync(PF[lstBTPaired.SelectedIndex].HostName, "1"); // Connect using Socket to Selected Item
+                    bluetoothSocket = new StreamSocket(); // Create a new Socket Connection
+                    await bluetoothSocket.ConnectAsync(PF[lstBTPaired.SelectedIndex].HostName, "1"); // Connect using Socket to Selected Item
 
                     // Once Connected, let's give Arduino a HELLO
                     var datab = GetBufferFromByteArray(Encoding.UTF8.GetBytes("1")); // Create Buffer/Packet for Sending
-                    await BTSock.OutputStream.WriteAsync(datab); // Send Arduino Buffer/Packet Message
+                    await bluetoothSocket.OutputStream.WriteAsync(datab); // Send Arduino Buffer/Packet Message
 
                     btnSendCommand.IsEnabled = true; // Allow commands to be sent via Command Button (Enabled)
                     
@@ -186,32 +167,10 @@ namespace Hexis_App
             }
         }
 
-
-        void PeerFinder_TriggeredConnectionStateChanged(object sender, TriggeredConnectionStateChangedEventArgs args)
-        {
-            // This will be used to Get Data from our Hardware soon
-
-            if (args.State == TriggeredConnectState.Failed)
-            {
-                txtBTStatus.Text = "Failed to Connect... Try again!";
-                BTStatus = "no"; // Not connected
-                return;
-            }
-
-            if (args.State == TriggeredConnectState.Completed)
-            {
-                txtBTStatus.Text = "Connected!";
-                BTStatus = "yes"; // Means we are connected
-                BT2Arduino_Receive();
-            }
-        }
-
         private void btnSendCommand_Click(object sender, RoutedEventArgs e)
         {
-            // In this Demo, our Arduino code knows to look for "3" to turn off/on LED/Motor for 4 Seconds
-            BT2Arduino_Send("2"); // This will send using the GoSend Feature
-            BT2Arduino_Receive();
-
+            sendData("2"); 
+            receiveData();
         }
 
         /// <summary>
