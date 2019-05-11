@@ -60,7 +60,8 @@
         <CommandBar IsSticky="True" x:Name="appBar_MainPage"  Background="Green">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Accept" IsCompact="False" Label="Zap Test" />
-                <AppBarButton Icon="Setting" IsCompact="False" Label="Settings" />
+                <AppBarButton Icon="Setting" IsCompact="False" Label="Settings"
+                              Click="AppBarButton_Click_1" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="About" Click="AppBarButton_Click"/>
